@@ -28,4 +28,16 @@ contract TestMetaCoin {
             "Owner should have 10000 MetaCoin initially"
         );
     }
+
+    function testInitialBalanceInEthWithNewMetaCoin() public {
+        MetaCoin meta = new MetaCoin();
+
+        uint256 expected = 20000;
+
+        Assert.equal(
+            meta.getBalanceInEth(tx.origin),
+            expected,
+            "Owner should have 20000 ETH initially"
+        );
+    }
 }

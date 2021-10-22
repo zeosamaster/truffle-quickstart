@@ -7,21 +7,20 @@ contract("MetaCoin", (accounts) => {
 
     assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
   });
-  it("should call a function that depends on a linked library", async () => {
+
+  it("should get balance in ETH", async () => {
     const metaCoinInstance = await MetaCoin.deployed();
-    const metaCoinBalance = (
-      await metaCoinInstance.getBalance.call(accounts[0])
-    ).toNumber();
-    const metaCoinEthBalance = (
-      await metaCoinInstance.getBalanceInEth.call(accounts[0])
-    ).toNumber();
+    const balanceInEth = await metaCoinInstance.getBalanceInEth.call(
+      accounts[0]
+    );
 
     assert.equal(
-      metaCoinEthBalance,
-      2 * metaCoinBalance,
-      "Library function returned unexpected function, linkage may be broken"
+      balanceInEth.valueOf(),
+      20000,
+      "20000 ETH wasn't in the first account"
     );
   });
+
   it("should send coin correctly", async () => {
     const metaCoinInstance = await MetaCoin.deployed();
 
